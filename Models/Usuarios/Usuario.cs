@@ -3,39 +3,38 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using GerenciadorDeTarefas.Models.Busines;
+using GerenciadorDeTarefas.Usuarios.Cargos;
 
-namespace GerenciadorDeTarefas
+
+namespace GerenciadorDeTarefas.Usuarios
 {
     abstract class Usuario
     {
-        protected string login,senha,nomeCompleto,cpf,email;
-        private TipoUsuario cargo;
+        protected string login,senha,nomeCompleto,cpf,email;       
         
-        protected Usuario(string login, string senha, string nomeCompleto, string cpf, string email, TipoUsuario cargo)
+        protected Usuario(string login, string senha, string nomeCompleto, string cpf, string email)
         {
             this.login = login;
             this.senha = senha;
             this.nomeCompleto = nomeCompleto;
             this.cpf = cpf;
             this.email = email;
-            this.cargo = cargo;
+            
         }
         internal string Login { get { return login; } }
         internal string Senha { get { return senha; } }
         internal string NomeCompleto { get { return nomeCompleto; } }
         internal string Cpf { get { return cpf; } }
         internal string Email { get { return email; } }        
-        internal TipoUsuario Cargo 
-        { 
-            get { return cargo; }
-            set { cargo = value; }
-        }
+       
 
-        protected bool FazerLogin(string login, string senha)
+        internal bool FazerLogin(string login, string senha)
         {
-            return (this.login == login && this.senha == senha);
+            return Login == login && Senha == senha;
         }
-        protected bool AlterarSenha(string senhaAtual, string novaSenha)
+        
+        internal bool AlterarSenha(string senhaAtual, string novaSenha)
         {
             if (this.senha == senhaAtual)
             {
@@ -44,7 +43,7 @@ namespace GerenciadorDeTarefas
             }
             return false;
         }
-        protected bool AlterarEmail(string email)
+        internal bool AlterarEmail(string email)
         {
             if (email.Contains("@") && email.Contains("."))
             {
@@ -53,7 +52,7 @@ namespace GerenciadorDeTarefas
             }
             return false;
         }
-        protected bool AlterarNomeCompleto(string nomeCompleto)
+        internal bool AlterarNomeCompleto(string nomeCompleto)
         {
             if (nomeCompleto.Length > 0)
             {
@@ -62,7 +61,7 @@ namespace GerenciadorDeTarefas
             }
             return false;
         }
-        protected bool AlterarCpf(string cpf)
+        internal bool AlterarCpf(string cpf)
         {
             if (cpf.Length == 11)
             {
@@ -71,11 +70,7 @@ namespace GerenciadorDeTarefas
             }
             return false;
         }
-        protected bool AlterarCargo(TipoUsuario cargo)
-        {
-            this.cargo = cargo;
-            return true;
-        }
+      
         internal void CriarTarefa(int idTarefa, string titulo, string descricao, string escopo, Usuario responsavel)
         {
             if (this is TechLead)
@@ -86,8 +81,7 @@ namespace GerenciadorDeTarefas
             }
             else
             {
-                Tarefa tarefa = new Tarefa(idTarefa, titulo, descricao, escopo, responsavel);
-                responsavel = this;
+                Tarefa tarefa = new Tarefa(idTarefa, titulo, descricao, escopo, responsavel);               
                 tarefa.Status = StatusTarefa.AguardandoAutorizacao;                               
             }
         }

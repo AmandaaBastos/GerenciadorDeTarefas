@@ -46,11 +46,13 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Controller\Login\TelaLogin.cs" />
+    <Compile Include="Controllers\Login\ValidaCpf.cs" />
+    <Compile Include="Controllers\Login\ValidaUsuario.cs" />
+    <Compile Include="Controllers\Login\ValidaSenha.cs" />
+    <Compile Include="Controllers\TelaInicialController.cs" />
     <Compile Include="Models\Busines\TarefaData.cs" />
     <Compile Include="Models\Usuarios\TipoUsuario.cs" />
     <Compile Include="Models\Usuarios\Cargos\Desenvolvedor.cs" />
-    <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Models\Busines\StatusTarefa.cs" />
     <Compile Include="Models\Busines\Tarefa.cs" />
@@ -62,6 +64,12 @@
     </Compile>
     <Compile Include="Views\TelaLogin.Designer.cs">
       <DependentUpon>TelaLogin.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Views\TelaPrincipal.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Views\TelaPrincipal.Designer.cs">
+      <DependentUpon>TelaPrincipal.cs</DependentUpon>
     </Compile>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>

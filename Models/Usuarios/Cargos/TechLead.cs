@@ -3,13 +3,14 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using GerenciadorDeTarefas.Models.Busines;
 
-namespace GerenciadorDeTarefas
+namespace GerenciadorDeTarefas.Usuarios.Cargos
 {
     internal class TechLead: Usuario
     {
-       internal TechLead(string login, string senha, string nomeCompleto, string cpf, string email, TipoUsuario cargo) 
-            : base(login, senha, nomeCompleto, cpf, email, cargo)
+       internal TechLead(string login, string senha, string nomeCompleto, string cpf, string email) 
+            : base(login, senha, nomeCompleto, cpf, email)
         {
         }
 
