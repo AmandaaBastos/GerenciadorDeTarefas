@@ -8,6 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using GerenciadorDeTarefas.Usuarios;
 using System.Windows.Forms;
+using System.Data.SqlClient;
 
 namespace GerenciadorDeTarefas.Views
 {
@@ -16,6 +17,16 @@ namespace GerenciadorDeTarefas.Views
         internal TelaPrincipal(Usuario usuario)
         {
             InitializeComponent();
+        }
+
+        private void listBox1_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            
+        }
+
+        private void linkLabel1_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        {
+           Application.Exit();
         }
     }
 }
