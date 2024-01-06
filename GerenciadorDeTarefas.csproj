@@ -46,10 +46,12 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Controllers\Login\ValidaCpf.cs" />
-    <Compile Include="Controllers\Login\ValidaUsuario.cs" />
-    <Compile Include="Controllers\Login\ValidaSenha.cs" />
-    <Compile Include="Controllers\TelaInicialController.cs" />
+    <Compile Include="Conections\Conexao.cs" />
+    <Compile Include="Conections\LoginComandos.cs" />
+    <Compile Include="Controllers\Controle.cs" />
+    <Compile Include="Controllers\Validation\ValidaCpf.cs" />
+    <Compile Include="Controllers\Validation\ValidaUsuario.cs" />
+    <Compile Include="Controllers\Validation\ValidaSenha.cs" />
     <Compile Include="Models\Busines\TarefaData.cs" />
     <Compile Include="Models\Usuarios\TipoUsuario.cs" />
     <Compile Include="Models\Usuarios\Cargos\Desenvolvedor.cs" />
@@ -98,11 +100,6 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="Data\Desenvolvedores.txt" />
-    <Content Include="Data\Tarefas.txt" />
-    <Content Include="Data\TechLeads.txt" />
   </ItemGroup>
   <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
