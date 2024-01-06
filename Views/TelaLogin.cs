@@ -16,8 +16,7 @@ namespace GerenciadorDeTarefas.Views
 
     public partial class TelaLogin : Form
     {
-        private TelaInicialController controller;
-
+        
         internal TextBox TxtUsuario { get => txtUsuario; private set => txtUsuario = value; }
         internal TextBox TxtSenha { get => txtSenha; private set => txtSenha = value; }
 
@@ -31,54 +30,60 @@ namespace GerenciadorDeTarefas.Views
         }
         public TelaLogin()
         {
-            InitializeComponent();
-            this.controller = new TelaInicialController(this);
+            InitializeComponent();           
         }
 
         private void TelaLogin_Load(object sender, EventArgs e)
         {
 
         }
-
-        private void label1_Click(object sender, EventArgs e)
+        private void souTechLead_CheckedChanged(object sender, EventArgs e)
         {
-
-        }
-
-        private void label2_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void textBox2_TextChanged(object sender, EventArgs e)
-        {
-            
-        }
-
-        private void label5_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void fazerLogin_Click(object sender, EventArgs e)
-        {
-            string usuarioDigitado = txtUsuario.Text;
-
-            if (controller.Autenticar(txtUsuario.Text, txtSenha.Text))
+            if (cbTechLead.Checked)
             {
-                this.Hide();
-                TelaPrincipal telaPrincipal = new TelaPrincipal(UsuarioData.SelecionarUsuario(usuarioDigitado));
-                telaPrincipal.ShowDialog();
-                this.Close();
+                Controle controle = new Controle();
+                controle.AcessarCargo(TxtUsuario.Text, "TechLead");
+            }
+            else
+            {
+                Controle controle = new Controle();
+                controle.AcessarCargo(TxtUsuario.Text, "Desenvolvedor");
             }
         }
 
-        private void label3_Click(object sender, EventArgs e)
-        {
+        private void fazerLogin_Click(object sender, EventArgs e)
+        {           
+            Controle controle = new Controle();
+            controle.Acessar(TxtUsuario.Text, TxtSenha.Text);
+            if(controle.mensagem == "" )
+            {              
+                if (controle.valido)
+                {                    
+                    if(cbTechLead.Checked)
+                    {
+                        TelaTechLead telaTech = new TelaTechLead();
+                        telaTech.Show();               
+                        MessageBox.Show("TechLead logado com sucesso", "Entrando", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    }
+                    else
+                    {
+                        TelaDev telaDesenvolvedor = new TelaDev();
+                        telaDesenvolvedor.Show();                       
+                        MessageBox.Show("Desenvolvedor logado com sucesso", "Entrando", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    }
+                }
+                else
+                {
+                    MessageBox.Show("Login não encontrado, verifique login e senha", "Erro", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+            }
+            else
+            {
+                MessageBox.Show(controle.mensagem);
+            }           
 
         }
-
-        private void label4_Click(object sender, EventArgs e)
+        private void txtUsuario_TextChanged(object sender, EventArgs e)
         {
 
         }
@@ -88,9 +93,13 @@ namespace GerenciadorDeTarefas.Views
 
         }
 
-        private void souTechLead_CheckedChanged(object sender, EventArgs e)
+        
+
+        private void linkLabel1_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
-                
+            Application.Exit();
         }
+
+        
     }
 }

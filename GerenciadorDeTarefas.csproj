@@ -46,10 +46,12 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Controllers\Login\ValidaCpf.cs" />
-    <Compile Include="Controllers\Login\ValidaUsuario.cs" />
-    <Compile Include="Controllers\Login\ValidaSenha.cs" />
-    <Compile Include="Controllers\TelaInicialController.cs" />
+    <Compile Include="Conections\Conexao.cs" />
+    <Compile Include="Conections\LoginComandos.cs" />
+    <Compile Include="Controllers\Controle.cs" />
+    <Compile Include="Controllers\Validation\ValidaCpf.cs" />
+    <Compile Include="Controllers\Validation\ValidaUsuario.cs" />
+    <Compile Include="Controllers\Validation\ValidaSenha.cs" />
     <Compile Include="Models\Busines\TarefaData.cs" />
     <Compile Include="Models\Usuarios\TipoUsuario.cs" />
     <Compile Include="Models\Usuarios\Cargos\Desenvolvedor.cs" />
@@ -59,17 +61,23 @@
     <Compile Include="Models\Usuarios\Cargos\TechLead.cs" />
     <Compile Include="Models\Usuarios\Usuario.cs" />
     <Compile Include="Models\Usuarios\UsuarioData.cs" />
+    <Compile Include="Views\TelaDev.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Views\TelaDev.Designer.cs">
+      <DependentUpon>TelaDev.cs</DependentUpon>
+    </Compile>
     <Compile Include="Views\TelaLogin.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Views\TelaLogin.Designer.cs">
       <DependentUpon>TelaLogin.cs</DependentUpon>
     </Compile>
-    <Compile Include="Views\TelaPrincipal.cs">
+    <Compile Include="Views\TelaTechLead.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Views\TelaPrincipal.Designer.cs">
-      <DependentUpon>TelaPrincipal.cs</DependentUpon>
+    <Compile Include="Views\TelaTechLead.Designer.cs">
+      <DependentUpon>TelaTechLead.cs</DependentUpon>
     </Compile>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
@@ -80,8 +88,14 @@
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
+    <EmbeddedResource Include="Views\TelaDev.resx">
+      <DependentUpon>TelaDev.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Views\TelaLogin.resx">
       <DependentUpon>TelaLogin.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Views\TelaTechLead.resx">
+      <DependentUpon>TelaTechLead.cs</DependentUpon>
     </EmbeddedResource>
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
@@ -95,11 +109,6 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="Data\Desenvolvedores.txt" />
-    <Content Include="Data\Tarefas.txt" />
-    <Content Include="Data\TechLeads.txt" />
   </ItemGroup>
   <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

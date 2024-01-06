@@ -29,10 +29,7 @@ namespace GerenciadorDeTarefas.Usuarios
         internal string Email { get { return email; } }        
        
 
-        internal bool FazerLogin(string login, string senha)
-        {
-            return Login == login && Senha == senha;
-        }
+        
         
         internal bool AlterarSenha(string senhaAtual, string novaSenha)
         {

@@ -6,14 +6,13 @@ using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using GerenciadorDeTarefas.Usuarios;
 using System.Windows.Forms;
 
 namespace GerenciadorDeTarefas.Views
 {
-    public partial class TelaPrincipal : Form
+    public partial class TelaDev : Form
     {
-        internal TelaPrincipal(Usuario usuario)
+        public TelaDev()
         {
             InitializeComponent();
         }

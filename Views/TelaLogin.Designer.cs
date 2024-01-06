@@ -35,9 +35,10 @@
             this.txtUsuario = new System.Windows.Forms.TextBox();
             this.label2 = new System.Windows.Forms.Label();
             this.panel1 = new System.Windows.Forms.Panel();
+            this.cbTechLead = new System.Windows.Forms.CheckBox();
             this.label5 = new System.Windows.Forms.Label();
-            this.fazerLogin = new System.Windows.Forms.Button();
-            this.souTechLead = new System.Windows.Forms.CheckBox();
+            this.btnLogin = new System.Windows.Forms.Button();
+            this.linkLabel1 = new System.Windows.Forms.LinkLabel();
             this.panel1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -50,7 +51,6 @@
             this.label1.Size = new System.Drawing.Size(67, 20);
             this.label1.TabIndex = 0;
             this.label1.Text = "Usuário";
-            this.label1.Click += new System.EventHandler(this.label1_Click);
             // 
             // txtSenha
             // 
@@ -58,6 +58,7 @@
             this.txtSenha.Location = new System.Drawing.Point(31, 225);
             this.txtSenha.Multiline = true;
             this.txtSenha.Name = "txtSenha";
+            this.txtSenha.PasswordChar = '*';
             this.txtSenha.Size = new System.Drawing.Size(257, 56);
             this.txtSenha.TabIndex = 1;
             this.txtSenha.TextChanged += new System.EventHandler(this.txtSenha_TextChanged);
@@ -71,7 +72,6 @@
             this.label3.Size = new System.Drawing.Size(218, 39);
             this.label3.TabIndex = 4;
             this.label3.Text = "BEM VINDO!";
-            this.label3.Click += new System.EventHandler(this.label3_Click);
             // 
             // label4
             // 
@@ -82,7 +82,6 @@
             this.label4.Size = new System.Drawing.Size(490, 58);
             this.label4.TabIndex = 5;
             this.label4.Text = "Faça login \r\npara entrar em contato com o suas tarefas";
-            this.label4.Click += new System.EventHandler(this.label4_Click);
             // 
             // txtUsuario
             // 
@@ -92,7 +91,7 @@
             this.txtUsuario.Name = "txtUsuario";
             this.txtUsuario.Size = new System.Drawing.Size(257, 56);
             this.txtUsuario.TabIndex = 7;
-            this.txtUsuario.TextChanged += new System.EventHandler(this.textBox2_TextChanged);
+            this.txtUsuario.TextChanged += new System.EventHandler(this.txtUsuario_TextChanged);
             // 
             // label2
             // 
@@ -103,14 +102,13 @@
             this.label2.Size = new System.Drawing.Size(56, 20);
             this.label2.TabIndex = 6;
             this.label2.Text = "Senha";
-            this.label2.Click += new System.EventHandler(this.label2_Click);
             // 
             // panel1
             // 
             this.panel1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.panel1.Controls.Add(this.souTechLead);
+            this.panel1.Controls.Add(this.cbTechLead);
             this.panel1.Controls.Add(this.label5);
-            this.panel1.Controls.Add(this.fazerLogin);
+            this.panel1.Controls.Add(this.btnLogin);
             this.panel1.Controls.Add(this.txtUsuario);
             this.panel1.Controls.Add(this.txtSenha);
             this.panel1.Controls.Add(this.label2);
@@ -119,6 +117,17 @@
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(324, 442);
             this.panel1.TabIndex = 8;
+            // 
+            // cbTechLead
+            // 
+            this.cbTechLead.AutoSize = true;
+            this.cbTechLead.Location = new System.Drawing.Point(193, 185);
+            this.cbTechLead.Name = "cbTechLead";
+            this.cbTechLead.Size = new System.Drawing.Size(91, 20);
+            this.cbTechLead.TabIndex = 10;
+            this.cbTechLead.Text = "TechLead";
+            this.cbTechLead.UseVisualStyleBackColor = true;
+            this.cbTechLead.CheckedChanged += new System.EventHandler(this.souTechLead_CheckedChanged);
             // 
             // label5
             // 
@@ -129,34 +138,35 @@
             this.label5.Size = new System.Drawing.Size(123, 39);
             this.label5.TabIndex = 9;
             this.label5.Text = "LOGIN";
-            this.label5.Click += new System.EventHandler(this.label5_Click);
             // 
-            // fazerLogin
+            // btnLogin
             // 
-            this.fazerLogin.Location = new System.Drawing.Point(33, 330);
-            this.fazerLogin.Name = "fazerLogin";
-            this.fazerLogin.Size = new System.Drawing.Size(255, 56);
-            this.fazerLogin.TabIndex = 8;
-            this.fazerLogin.Text = "LOGIN";
-            this.fazerLogin.UseVisualStyleBackColor = true;
-            this.fazerLogin.Click += new System.EventHandler(this.fazerLogin_Click);
+            this.btnLogin.Location = new System.Drawing.Point(33, 330);
+            this.btnLogin.Name = "btnLogin";
+            this.btnLogin.Size = new System.Drawing.Size(255, 56);
+            this.btnLogin.TabIndex = 8;
+            this.btnLogin.Text = "LOGIN";
+            this.btnLogin.UseVisualStyleBackColor = true;
+            this.btnLogin.Click += new System.EventHandler(this.fazerLogin_Click);
             // 
-            // souTechLead
+            // linkLabel1
             // 
-            this.souTechLead.AutoSize = true;
-            this.souTechLead.Location = new System.Drawing.Point(193, 185);
-            this.souTechLead.Name = "souTechLead";
-            this.souTechLead.Size = new System.Drawing.Size(114, 25);
-            this.souTechLead.TabIndex = 10;
-            this.souTechLead.Text = "TechLead";
-            this.souTechLead.UseVisualStyleBackColor = true;
-            this.souTechLead.CheckedChanged += new System.EventHandler(this.souTechLead_CheckedChanged);
+            this.linkLabel1.AutoSize = true;
+            this.linkLabel1.Location = new System.Drawing.Point(1155, 19);
+            this.linkLabel1.Name = "linkLabel1";
+            this.linkLabel1.Size = new System.Drawing.Size(31, 16);
+            this.linkLabel1.TabIndex = 9;
+            this.linkLabel1.TabStop = true;
+            this.linkLabel1.Text = "Sair";
+            this.linkLabel1.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.linkLabel1_LinkClicked);
             // 
             // TelaLogin
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1072, 644);
+            this.BackColor = System.Drawing.SystemColors.ButtonFace;
+            this.ClientSize = new System.Drawing.Size(1233, 693);
+            this.Controls.Add(this.linkLabel1);
             this.Controls.Add(this.panel1);
             this.Controls.Add(this.label4);
             this.Controls.Add(this.label3);
@@ -171,7 +181,7 @@
         }
 
         #endregion
-
+        
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.TextBox txtSenha;
         private System.Windows.Forms.Label label3;
@@ -179,8 +189,9 @@
         private System.Windows.Forms.TextBox txtUsuario;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Panel panel1;
-        private System.Windows.Forms.Button fazerLogin;
+        private System.Windows.Forms.Button btnLogin;
         private System.Windows.Forms.Label label5;
-        private System.Windows.Forms.CheckBox souTechLead;
+        private System.Windows.Forms.CheckBox cbTechLead;
+        private System.Windows.Forms.LinkLabel linkLabel1;
     }
 }
