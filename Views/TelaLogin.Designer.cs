@@ -38,6 +38,7 @@
             this.cbTechLead = new System.Windows.Forms.CheckBox();
             this.label5 = new System.Windows.Forms.Label();
             this.btnLogin = new System.Windows.Forms.Button();
+            this.linkLabel1 = new System.Windows.Forms.LinkLabel();
             this.panel1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -80,7 +81,7 @@
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(490, 58);
             this.label4.TabIndex = 5;
-            this.label4.Text = "Faça login \r\npara entrar em contato com o suas tarefas";           
+            this.label4.Text = "Faça login \r\npara entrar em contato com o suas tarefas";
             // 
             // txtUsuario
             // 
@@ -90,7 +91,7 @@
             this.txtUsuario.Name = "txtUsuario";
             this.txtUsuario.Size = new System.Drawing.Size(257, 56);
             this.txtUsuario.TabIndex = 7;
-            this.txtUsuario.TextChanged += new System.EventHandler(this.textBox2_TextChanged);
+            this.txtUsuario.TextChanged += new System.EventHandler(this.txtUsuario_TextChanged);
             // 
             // label2
             // 
@@ -100,7 +101,7 @@
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(56, 20);
             this.label2.TabIndex = 6;
-            this.label2.Text = "Senha";           
+            this.label2.Text = "Senha";
             // 
             // panel1
             // 
@@ -136,7 +137,7 @@
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(123, 39);
             this.label5.TabIndex = 9;
-            this.label5.Text = "LOGIN";            
+            this.label5.Text = "LOGIN";
             // 
             // btnLogin
             // 
@@ -148,12 +149,24 @@
             this.btnLogin.UseVisualStyleBackColor = true;
             this.btnLogin.Click += new System.EventHandler(this.fazerLogin_Click);
             // 
+            // linkLabel1
+            // 
+            this.linkLabel1.AutoSize = true;
+            this.linkLabel1.Location = new System.Drawing.Point(1155, 19);
+            this.linkLabel1.Name = "linkLabel1";
+            this.linkLabel1.Size = new System.Drawing.Size(31, 16);
+            this.linkLabel1.TabIndex = 9;
+            this.linkLabel1.TabStop = true;
+            this.linkLabel1.Text = "Sair";
+            this.linkLabel1.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.linkLabel1_LinkClicked);
+            // 
             // TelaLogin
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.ButtonFace;
             this.ClientSize = new System.Drawing.Size(1233, 693);
+            this.Controls.Add(this.linkLabel1);
             this.Controls.Add(this.panel1);
             this.Controls.Add(this.label4);
             this.Controls.Add(this.label3);
@@ -179,5 +192,6 @@
         private System.Windows.Forms.Button btnLogin;
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.CheckBox cbTechLead;
+        private System.Windows.Forms.LinkLabel linkLabel1;
     }
 }

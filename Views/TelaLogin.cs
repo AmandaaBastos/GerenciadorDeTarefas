@@ -36,26 +36,70 @@ namespace GerenciadorDeTarefas.Views
         private void TelaLogin_Load(object sender, EventArgs e)
         {
 
-        }      
-
-        private void textBox2_TextChanged(object sender, EventArgs e)
+        }
+        private void souTechLead_CheckedChanged(object sender, EventArgs e)
         {
-            
+            if (cbTechLead.Checked)
+            {
+                Controle controle = new Controle();
+                controle.AcessarCargo(TxtUsuario.Text, "TechLead");
+            }
+            else
+            {
+                Controle controle = new Controle();
+                controle.AcessarCargo(TxtUsuario.Text, "Desenvolvedor");
+            }
         }
 
         private void fazerLogin_Click(object sender, EventArgs e)
+        {           
+            Controle controle = new Controle();
+            controle.Acessar(TxtUsuario.Text, TxtSenha.Text);
+            if(controle.mensagem == "" )
+            {              
+                if (controle.valido)
+                {                    
+                    if(cbTechLead.Checked)
+                    {
+                        TelaTechLead telaTech = new TelaTechLead();
+                        telaTech.Show();               
+                        MessageBox.Show("TechLead logado com sucesso", "Entrando", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    }
+                    else
+                    {
+                        TelaDev telaDesenvolvedor = new TelaDev();
+                        telaDesenvolvedor.Show();                       
+                        MessageBox.Show("Desenvolvedor logado com sucesso", "Entrando", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    }
+                }
+                else
+                {
+                    MessageBox.Show("Login não encontrado, verifique login e senha", "Erro", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+            }
+            else
+            {
+                MessageBox.Show(controle.mensagem);
+            }           
+
+        }
+        private void txtUsuario_TextChanged(object sender, EventArgs e)
         {
-           
-        }    
+
+        }
 
         private void txtSenha_TextChanged(object sender, EventArgs e)
         {
 
         }
 
-        private void souTechLead_CheckedChanged(object sender, EventArgs e)
+        
+
+        private void linkLabel1_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
-                
+            Application.Exit();
         }
+
+        
     }
 }

@@ -61,17 +61,23 @@
     <Compile Include="Models\Usuarios\Cargos\TechLead.cs" />
     <Compile Include="Models\Usuarios\Usuario.cs" />
     <Compile Include="Models\Usuarios\UsuarioData.cs" />
+    <Compile Include="Views\TelaDev.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Views\TelaDev.Designer.cs">
+      <DependentUpon>TelaDev.cs</DependentUpon>
+    </Compile>
     <Compile Include="Views\TelaLogin.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Views\TelaLogin.Designer.cs">
       <DependentUpon>TelaLogin.cs</DependentUpon>
     </Compile>
-    <Compile Include="Views\TelaPrincipal.cs">
+    <Compile Include="Views\TelaTechLead.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Views\TelaPrincipal.Designer.cs">
-      <DependentUpon>TelaPrincipal.cs</DependentUpon>
+    <Compile Include="Views\TelaTechLead.Designer.cs">
+      <DependentUpon>TelaTechLead.cs</DependentUpon>
     </Compile>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
@@ -82,11 +88,14 @@
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
+    <EmbeddedResource Include="Views\TelaDev.resx">
+      <DependentUpon>TelaDev.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Views\TelaLogin.resx">
       <DependentUpon>TelaLogin.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Views\TelaPrincipal.resx">
-      <DependentUpon>TelaPrincipal.cs</DependentUpon>
+    <EmbeddedResource Include="Views\TelaTechLead.resx">
+      <DependentUpon>TelaTechLead.cs</DependentUpon>
     </EmbeddedResource>
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
