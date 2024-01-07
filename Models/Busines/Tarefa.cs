@@ -1,45 +1,74 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data.SqlClient;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using GerenciadorDeTarefas.Conections;
 using GerenciadorDeTarefas.Models.Busines;
 using GerenciadorDeTarefas.Usuarios;
+using static System.Windows.Forms.VisualStyles.VisualStyleElement.ListView;
+using static System.Windows.Forms.VisualStyles.VisualStyleElement.TextBox;
 
 namespace GerenciadorDeTarefas.Models.Busines
 {
     internal class Tarefa
     {
         public int _idTarefa;
-        private string _titulo, _descricao, _escopo;
-        private DateTime _dataDeCriacao, _dataDeConclusao;
-        private Usuario _responsavel;
-        private StatusTarefa _status;
-        private bool _impedimento;
+        private string _titulo, _descricao, _escopo, _status;
+        private DateTime _dataCriacao, _dataConclusao;
+        private Usuario _responsavel;             
+        SqlCommand cmd = new SqlCommand();
+        SqlDataReader reader;
 
 
-        internal Tarefa(int idTarefa, string titulo, string descricao, string escopo, Usuario responsavel)
+        internal Tarefa() { }
+
+        internal Tarefa ObterTarefa (int idTarefa, string titulo, string descricao, string escopo, Usuario responsavel)
         {
-            this._idTarefa = idTarefa;
-            this._titulo = titulo;
-            this._descricao = descricao;
-            this._escopo = escopo;
-            this._responsavel = responsavel;
-            this._dataDeCriacao = DateTime.Now;
-            this._dataDeConclusao = DataDeConclusao;
-            this._status = StatusTarefa.Aberta;
-            this._impedimento = false;
+            Tarefa tarefa = null;
+
+            cmd.CommandText = "SELECT * FROM tarefas WHERE idTarefa = @idTarefa";
+            cmd.Parameters.Clear();
+            cmd.Parameters.AddWithValue("@idTarefa", idTarefa);
+
+            Conexao conexao = new Conexao();
+            cmd.Connection = conexao.Conectar();
+
+            using (reader = cmd.ExecuteReader())
+            {
+                if (reader.HasRows)
+                {
+                    reader.Read();
+
+                    tarefa = new Tarefa
+                    {
+                        _idTarefa = Convert.ToInt32(reader["idTarefa"]),
+                        _titulo = reader["titulo"].ToString(),
+                        _descricao = reader["descricao"].ToString(),
+                        _escopo = reader["escopo"].ToString(),
+                        _dataCriacao = Convert.ToDateTime(reader["dataCriacao"]),
+                        _dataConclusao = Convert.ToDateTime(reader["dataConclusao"]),
+                        _responsavel = UsuarioData.SelecionarUsuario(reader["responsavel"].ToString()),
+                        _status = reader["status"].ToString()                                              
+                    };
+
+                };
+            }       
+            conexao.Desconectar();
+
+            return tarefa;
         }
 
         internal int IdTarefa { get { return _idTarefa; } }
         internal string Titulo { get { return _titulo; } }
         internal string Escopo { get { return _escopo; } }
         internal string Descricao { get { return _descricao; } }
-        internal DateTime DataDeCriacao { get { return _dataDeCriacao; } }
+        internal DateTime DataDeCriacao { get { return _dataCriacao; } }
         internal DateTime DataDeConclusao
         {
-            get { return _dataDeConclusao; }
-            set { _dataDeConclusao = value; }
+            get { return _dataConclusao; }
+            set { _dataConclusao = value; }
         }
         internal Usuario Responsavel { get { return _responsavel; } }
         internal bool Impedimento { get { return _impedimento; } }
@@ -54,7 +83,7 @@ namespace GerenciadorDeTarefas.Models.Busines
             if (this._status == StatusTarefa.EmAndamento)
             {
                 this._status = StatusTarefa.Concluida;
-                this._dataDeConclusao = DateTime.Now;
+                this._dataConclusao = DateTime.Now;
             }
             else
             {
@@ -65,6 +94,7 @@ namespace GerenciadorDeTarefas.Models.Busines
         {
             _responsavel = usuario;
         }
+    }
 
 
         //internal bool DefinirImpedimento(bool impedimento)

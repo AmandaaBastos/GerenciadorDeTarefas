@@ -14,6 +14,10 @@ namespace GerenciadorDeTarefas.Models.Busines
         {
             return _tarefas;
         }
+        internal void AdicionarTarefa(Tarefa tarefa)
+        {
+            _tarefas.Add(tarefa);
+        }
          
 
     }

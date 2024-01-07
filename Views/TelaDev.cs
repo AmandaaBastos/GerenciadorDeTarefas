@@ -49,8 +49,7 @@ namespace GerenciadorDeTarefas.Views
             listTarefas.Columns.Add("Escopo", 100);
             listTarefas.Columns.Add("Data Criação", 80);
             listTarefas.Columns.Add("Data Entrega", 80);
-            Conexao conexao = new Conexao();
-            conexao.Conectar();
+            
             // resto do código banco de dados
         }
 
