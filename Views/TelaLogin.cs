@@ -53,7 +53,7 @@ namespace GerenciadorDeTarefas.Views
 
         private void fazerLogin_Click(object sender, EventArgs e)
         {           
-            Controle controle = new Controle();
+            Controle controle = new Controle();           
             controle.Acessar(TxtUsuario.Text, TxtSenha.Text);
             if(controle.mensagem == "" )
             {              
@@ -61,16 +61,17 @@ namespace GerenciadorDeTarefas.Views
                 {                    
                     if(cbTechLead.Checked)
                     {
-                        TelaTechLead telaTech = new TelaTechLead();
+                        TelaTechLead telaTech = new TelaTechLead(TxtUsuario.Text, TxtSenha.Text);
                         telaTech.Show();               
                         MessageBox.Show("TechLead logado com sucesso", "Entrando", MessageBoxButtons.OK, MessageBoxIcon.Information);
                     }
                     else
                     {
-                        TelaDev telaDesenvolvedor = new TelaDev();
+                        TelaDev telaDesenvolvedor = new TelaDev(TxtUsuario.Text, TxtSenha.Text);
                         telaDesenvolvedor.Show();                       
                         MessageBox.Show("Desenvolvedor logado com sucesso", "Entrando", MessageBoxButtons.OK, MessageBoxIcon.Information);
                     }
+                    
                 }
                 else
                 {

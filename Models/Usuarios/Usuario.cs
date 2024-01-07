@@ -1,34 +1,66 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data.SqlClient;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using GerenciadorDeTarefas.Conections;
 using GerenciadorDeTarefas.Models.Busines;
 using GerenciadorDeTarefas.Usuarios.Cargos;
 
 
 namespace GerenciadorDeTarefas.Usuarios
 {
-    abstract class Usuario
+    internal class Usuario
     {
-        protected string login,senha,nomeCompleto,cpf,email;       
-        
-        protected Usuario(string login, string senha, string nomeCompleto, string cpf, string email)
+        SqlCommand cmd = new SqlCommand();
+        SqlDataReader reader;
+        protected string login,senha,nomeCompleto,cpf,email, cargo;
+
+        internal Usuario() { }
+
+        internal Usuario ObterUsuario(string login, string senha)
         {
-            this.login = login;
-            this.senha = senha;
-            this.nomeCompleto = nomeCompleto;
-            this.cpf = cpf;
-            this.email = email;
-            
+            Usuario usuario = null;
+
+            cmd.CommandText = "SELECT * FROM usuarios WHERE login = @login AND senha = @senha";
+            cmd.Parameters.Clear();
+            cmd.Parameters.AddWithValue("@login", login);
+            cmd.Parameters.AddWithValue("@senha", senha);
+
+            Conexao conexao = new Conexao();
+            cmd.Connection = conexao.Conectar();
+
+            using ( reader = cmd.ExecuteReader())
+            {
+                if (reader.HasRows)
+                {                    
+                    reader.Read();
+
+                    usuario = new Usuario
+                    {
+                        login = reader["login"].ToString(),
+                        senha = reader["senha"].ToString(),
+                        nomeCompleto = reader["nomeCompleto"].ToString(),
+                        cpf = reader["cpf"].ToString(),
+                        email = reader["email"].ToString(),
+                        cargo = reader["cargo"].ToString()
+                    };
+                }
+            }
+            conexao.Desconectar();
+
+            return usuario;
         }
+
         internal string Login { get { return login; } }
         internal string Senha { get { return senha; } }
         internal string NomeCompleto { get { return nomeCompleto; } }
         internal string Cpf { get { return cpf; } }
-        internal string Email { get { return email; } }        
+        internal string Email { get { return email; } }  
+        internal string Cargo { get { return cargo; } }
        
-
+        
         
         
         internal bool AlterarSenha(string senhaAtual, string novaSenha)

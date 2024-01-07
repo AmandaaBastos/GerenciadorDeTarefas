@@ -9,8 +9,7 @@ namespace GerenciadorDeTarefas.Usuarios.Cargos
 {
     internal class Desenvolvedor: Usuario
     {
-        internal Desenvolvedor(string login, string senha, string nomeCompleto, string cpf, string email)
-            : base(login, senha, nomeCompleto, cpf, email)
+        internal Desenvolvedor()
         {          
         }     
 

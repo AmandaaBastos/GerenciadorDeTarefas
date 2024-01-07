@@ -61,6 +61,12 @@
     <Compile Include="Models\Usuarios\Cargos\TechLead.cs" />
     <Compile Include="Models\Usuarios\Usuario.cs" />
     <Compile Include="Models\Usuarios\UsuarioData.cs" />
+    <Compile Include="Views\TelaCriacaoTarefa.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Views\TelaCriacaoTarefa.Designer.cs">
+      <DependentUpon>TelaCriacaoTarefa.cs</DependentUpon>
+    </Compile>
     <Compile Include="Views\TelaDev.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -88,6 +94,9 @@
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
+    <EmbeddedResource Include="Views\TelaCriacaoTarefa.resx">
+      <DependentUpon>TelaCriacaoTarefa.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Views\TelaDev.resx">
       <DependentUpon>TelaDev.cs</DependentUpon>
     </EmbeddedResource>

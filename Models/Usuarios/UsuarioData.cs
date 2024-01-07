@@ -15,15 +15,6 @@ namespace GerenciadorDeTarefas.Usuarios
         private static List<Desenvolvedor> _desenvolvedores;
         private static List<TechLead> _techLeads;
 
-        private static readonly string _DIRECTORY_PATH = AppDomain.CurrentDomain.BaseDirectory.Replace("\\bin\\Debug", "") + "\\Data";
-        private static readonly string _FILE_PATH_DESENVOLVEDOR = Path.Combine(_DIRECTORY_PATH, "Desenvolvedores.txt");
-        private static readonly string _FILE_PATH_TECHLEAD = Path.Combine(_DIRECTORY_PATH, "TechLead.txt");
-
-        static UsuarioData()
-        {
-            //_desenvolvedores = LerDesenvolvedoresTxt();
-            //_techLeads = LerTechLeadsTxt();
-        }
 
         internal static List<Tarefa> ListarTarefasUsuario(Usuario usuario)
         {
