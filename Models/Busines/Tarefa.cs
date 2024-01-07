@@ -15,7 +15,7 @@ namespace GerenciadorDeTarefas.Models.Busines
     internal class Tarefa
     {
         internal int idTarefa;
-        internal string titulo, descricao, escopo, status;
+        internal string titulo, observacao, escopo, status;
         internal DateTime dataCriacao, dataConclusao;
         internal Usuario responsavel;
         SqlCommand cmd = new SqlCommand();
@@ -44,7 +44,7 @@ namespace GerenciadorDeTarefas.Models.Busines
                     reader.Read();
                     idTarefa = Convert.ToInt32(reader["idTarefa"]);
                     titulo = reader["titulo"].ToString();
-                    descricao = reader["descricao"].ToString();
+                    observacao = reader["observacao"].ToString();
                     escopo = reader["escopo"].ToString();
                     dataCriacao = Convert.ToDateTime(reader["dataCriacao"]);
                     dataConclusao = Convert.ToDateTime(reader["dataConclusao"]);
@@ -62,7 +62,7 @@ namespace GerenciadorDeTarefas.Models.Busines
         internal int IdTarefa { get { return idTarefa; } }
         internal string Titulo { get { return titulo; } }
         internal string Escopo { get { return escopo; } }
-        internal string Descricao { get { return descricao; } }
+        internal string Descricao { get { return observacao; } }
         internal DateTime DataCriacao { get { return dataCriacao; } }
         internal DateTime DataConclusao
         {

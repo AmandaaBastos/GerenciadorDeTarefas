@@ -30,33 +30,44 @@ namespace GerenciadorDeTarefas.Views
             string email = usuarioAutenticado.Email;
             string cargo = usuarioAutenticado.Cargo;
 
-            //this.label1.Text = $"Bem vindo, {nomeCompleto}";
-        }
-
-
-        private void listView1_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            
-        }
-
-
+            this.label2.Text = $"Olá, {nomeCompleto}";
+        }   
 
         private void TelaTech_Load(object sender, EventArgs e)
+        {           
+            CarregarDadosListView(listTodasTarefas, "Select * From tarefas");
+            CarregarDadosListView(listTarefasAtraso, "select * from tarefas where status = 'Em Atraso'");
+            CarregarDadosListView(listTarefaAnalise, "select * from tarefas where status = 'Em Análise'");
+            CarregarDadosListView(listTarefaConcluida, "select * from tarefas where status = 'Concluída'");
+            CarregarDadosListView(listTarefaImpedimento, "select * from tarefas where status = 'Com Impedimento'");
+            CarregarDadosListView(listTarefaAbandonada, "select * from tarefas where status = 'Abandonada'");
+            
+
+        }    
+
+        private void label1_Click(object sender, EventArgs e)
         {
-            listTarefas.View = View.Details;
-            listTarefas.Columns.Add("ID", 100);
-            listTarefas.Columns.Add("Titulo", 300);
-            listTarefas.Columns.Add("Responsável", 150);
-            listTarefas.Columns.Add("Escopo", 100);
-            listTarefas.Columns.Add("Data Criação", 80);
-            listTarefas.Columns.Add("Data Conclusão", 80);
-            listTarefas.Columns.Add("Status", 100);
+            TelaCriacaoTarefa telaCriacaoTarefa = new TelaCriacaoTarefa();
+            telaCriacaoTarefa.Show();
+        }
+
+        private void CarregarDadosListView(System.Windows.Forms.ListView listView, string query)
+        {
+            listView.View = View.Details;
+            listView.Columns.Add("ID", 100);
+            listView.Columns.Add("Titulo", 300);
+            listView.Columns.Add("Responsável", 150);
+            listView.Columns.Add("Escopo", 100);
+            listView.Columns.Add("Data Criação", 80);
+            listView.Columns.Add("Data Conclusão", 80);
+            listView.Columns.Add("Status", 100);
+            listView.Columns.Add("Observação", 200);
 
             Conexao conexao = new Conexao();
             conexao.Conectar();
-            SqlCommand cmd = new SqlCommand("Select * From tarefas", conexao.Conectar());
+            SqlCommand cmd = new SqlCommand(query, conexao.Conectar());
             SqlDataReader reader = cmd.ExecuteReader();
-            while(reader.Read())
+            while (reader.Read())
             {
                 ListViewItem item = new ListViewItem(reader["idTarefa"].ToString());
                 item.SubItems.Add(reader["titulo"].ToString());
@@ -65,25 +76,14 @@ namespace GerenciadorDeTarefas.Views
                 item.SubItems.Add(reader["dataCriacao"].ToString());
                 item.SubItems.Add(reader["dataConclusao"].ToString());
                 item.SubItems.Add(reader["status"].ToString());
-                listTarefas.Items.Add(item);
+                item.SubItems.Add(reader["observacao"].ToString());
+                listView.Items.Add(item);
             }
-
         }
 
-        private void button1_Click(object sender, EventArgs e)
+        private void label2_Click(object sender, EventArgs e)
         {
 
-        }
-
-        private void button3_Click(object sender, EventArgs e)
-        {
-            
-        }
-
-        private void label1_Click(object sender, EventArgs e)
-        {
-            TelaCriacaoTarefa telaCriacaoTarefa = new TelaCriacaoTarefa();
-            telaCriacaoTarefa.Show();
         }
     }
 }

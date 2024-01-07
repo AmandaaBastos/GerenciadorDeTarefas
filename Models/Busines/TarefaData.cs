@@ -41,7 +41,7 @@ namespace GerenciadorDeTarefas.Models.Busines
                     {
                         idTarefa = Convert.ToInt32(reader["idTarefa"]),
                         titulo = reader["titulo"].ToString(),
-                        descricao = reader["descricao"].ToString(),
+                        observacao = reader["observacao"].ToString(),
                         escopo = reader["escopo"].ToString(),
                         dataCriacao = Convert.ToDateTime(reader["dataCriacao"]),
                         dataConclusao = Convert.ToDateTime(reader["dataConclusao"]),
