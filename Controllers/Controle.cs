@@ -9,15 +9,15 @@ namespace GerenciadorDeTarefas.Controllers
 {
     internal class Controle
     {
-        internal bool valido;
-        internal bool vCargo;
+        internal bool techLead;
+        internal bool valido;        
         internal string mensagem = "";
         
         internal bool Acessar(String login, String senha)//Pega os dados do forms
         {
             LoginComandos loginComandos = new LoginComandos();
             valido = loginComandos.VerificarLogin(login, senha);
-            if (loginComandos.mensagem != mensagem && vCargo)
+            if (loginComandos.mensagem != mensagem)
             {    
                 this.mensagem = loginComandos.mensagem;              
             }
@@ -27,16 +27,15 @@ namespace GerenciadorDeTarefas.Controllers
         {
             return mensagem;
         }
-        internal bool AcessarCargo(String login, String cargo)
+        internal bool VerificarCargo(String login, String senha)
         {
             LoginComandos loginComandos = new LoginComandos();
-            vCargo = loginComandos.VerificarCargo(login, cargo);
-            if (loginComandos.mensagem != mensagem)
+            techLead = loginComandos.VerificarCargo(login, senha);
+            if (!loginComandos.techLead)
             {
-                this.mensagem = loginComandos.mensagem;
-            }           
-            return vCargo;
-            
+                techLead = false;
+            }
+            return techLead;
         }
     }
 }

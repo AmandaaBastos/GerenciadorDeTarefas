@@ -35,7 +35,6 @@
             this.txtUsuario = new System.Windows.Forms.TextBox();
             this.label2 = new System.Windows.Forms.Label();
             this.panel1 = new System.Windows.Forms.Panel();
-            this.cbTechLead = new System.Windows.Forms.CheckBox();
             this.label5 = new System.Windows.Forms.Label();
             this.btnLogin = new System.Windows.Forms.Button();
             this.linkLabel1 = new System.Windows.Forms.LinkLabel();
@@ -106,7 +105,6 @@
             // panel1
             // 
             this.panel1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.panel1.Controls.Add(this.cbTechLead);
             this.panel1.Controls.Add(this.label5);
             this.panel1.Controls.Add(this.btnLogin);
             this.panel1.Controls.Add(this.txtUsuario);
@@ -117,17 +115,6 @@
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(324, 442);
             this.panel1.TabIndex = 8;
-            // 
-            // cbTechLead
-            // 
-            this.cbTechLead.AutoSize = true;
-            this.cbTechLead.Location = new System.Drawing.Point(193, 185);
-            this.cbTechLead.Name = "cbTechLead";
-            this.cbTechLead.Size = new System.Drawing.Size(91, 20);
-            this.cbTechLead.TabIndex = 10;
-            this.cbTechLead.Text = "TechLead";
-            this.cbTechLead.UseVisualStyleBackColor = true;
-            this.cbTechLead.CheckedChanged += new System.EventHandler(this.souTechLead_CheckedChanged);
             // 
             // label5
             // 
@@ -191,7 +178,6 @@
         private System.Windows.Forms.Panel panel1;
         private System.Windows.Forms.Button btnLogin;
         private System.Windows.Forms.Label label5;
-        private System.Windows.Forms.CheckBox cbTechLead;
         private System.Windows.Forms.LinkLabel linkLabel1;
     }
 }

@@ -12,17 +12,18 @@ using System.Windows.Forms;
 using static System.Net.Mime.MediaTypeNames;
 using GerenciadorDeTarefas.Conections;
 using static System.Windows.Forms.VisualStyles.VisualStyleElement;
+using GerenciadorDeTarefas.Models.Busines;
 
 
 namespace GerenciadorDeTarefas.Views
 {
     public partial class TelaDev : Form
     {
-        public TelaDev(string TxtUsuario, string TxtSenha)
+        public TelaDev(string TxtUsuario)
         {
             InitializeComponent();
             Usuario usuario = new Usuario();
-            Usuario usuarioAutenticado = usuario.ObterUsuario(TxtUsuario, TxtSenha);
+            Usuario usuarioAutenticado = usuario.ObterUsuario(TxtUsuario);
             string login = usuarioAutenticado.Login;
             string nomeCompleto = usuarioAutenticado.NomeCompleto;
             string cpf = usuarioAutenticado.Cpf;
@@ -38,19 +39,35 @@ namespace GerenciadorDeTarefas.Views
             
         }
 
-       
+
 
         private void TelaDev_Load(object sender, EventArgs e)
         {
-            listTarefas.View = View.Details;           
+            listTarefas.View = View.Details;
             listTarefas.Columns.Add("ID", 100);
             listTarefas.Columns.Add("Titulo", 300);
             listTarefas.Columns.Add("Responsável", 150);
             listTarefas.Columns.Add("Escopo", 100);
             listTarefas.Columns.Add("Data Criação", 80);
-            listTarefas.Columns.Add("Data Entrega", 80);
-            
-            // resto do código banco de dados
+            listTarefas.Columns.Add("Data Conclusão", 80);
+            listTarefas.Columns.Add("Status", 100);
+
+            Conexao conexao = new Conexao();
+            conexao.Conectar();
+            SqlCommand cmd = new SqlCommand("Select * From tarefas", conexao.Conectar());
+            SqlDataReader reader = cmd.ExecuteReader();
+            while(reader.Read())
+            {
+                ListViewItem item = new ListViewItem(reader["idTarefa"].ToString());
+                item.SubItems.Add(reader["titulo"].ToString());
+                item.SubItems.Add(reader["responsavel"].ToString());
+                item.SubItems.Add(reader["escopo"].ToString());
+                item.SubItems.Add(reader["dataCriacao"].ToString());
+                item.SubItems.Add(reader["dataConclusao"].ToString());
+                item.SubItems.Add(reader["status"].ToString());
+                listTarefas.Items.Add(item);
+            }
+
         }
 
         private void button1_Click(object sender, EventArgs e)

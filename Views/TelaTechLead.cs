@@ -13,11 +13,11 @@ namespace GerenciadorDeTarefas.Views
 {
     public partial class TelaTechLead : Form
     {
-        public TelaTechLead (string TxtUsuario, string TxtSenha)
+        public TelaTechLead (string TxtUsuario)
         {
             InitializeComponent();
             Usuario usuario = new Usuario();
-            Usuario usuarioAutenticado = usuario.ObterUsuario(TxtUsuario, TxtSenha);
+            Usuario usuarioAutenticado = usuario.ObterUsuario(TxtUsuario);
             string login = usuarioAutenticado.Login;
             string nomeCompleto = usuarioAutenticado.NomeCompleto;
             string cpf = usuarioAutenticado.Cpf;

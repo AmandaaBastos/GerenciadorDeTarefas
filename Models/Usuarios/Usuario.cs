@@ -15,18 +15,17 @@ namespace GerenciadorDeTarefas.Usuarios
     {
         SqlCommand cmd = new SqlCommand();
         SqlDataReader reader;
-        protected string login,senha,nomeCompleto,cpf,email, cargo;
+        internal string login,senha,nomeCompleto,cpf,email, cargo;
 
         internal Usuario() { }
 
-        internal Usuario ObterUsuario(string login, string senha)
+        internal Usuario ObterUsuario(string login)
         {
             Usuario usuario = null;
 
-            cmd.CommandText = "SELECT * FROM usuarios WHERE login = @login AND senha = @senha";
+            cmd.CommandText = "SELECT * FROM usuarios WHERE login = @login";
             cmd.Parameters.Clear();
-            cmd.Parameters.AddWithValue("@login", login);
-            cmd.Parameters.AddWithValue("@senha", senha);
+            cmd.Parameters.AddWithValue("@login", login);           
 
             Conexao conexao = new Conexao();
             cmd.Connection = conexao.Conectar();
@@ -100,19 +99,6 @@ namespace GerenciadorDeTarefas.Usuarios
             return false;
         }
       
-        internal void CriarTarefa(int idTarefa, string titulo, string descricao, string escopo, Usuario responsavel)
-        {
-            if (this is TechLead)
-            {
-                Tarefa tarefa = new Tarefa(idTarefa, titulo, descricao, escopo, responsavel);
-                tarefa.Status = StatusTarefa.Aberta;
-                Console.WriteLine("Tarefa criada com sucesso");
-            }
-            else
-            {
-                Tarefa tarefa = new Tarefa(idTarefa, titulo, descricao, escopo, responsavel);               
-                tarefa.Status = StatusTarefa.AguardandoAutorizacao;                               
-            }
-        }
+       
     }
 }
