@@ -67,11 +67,11 @@
     <Compile Include="Views\TelaCriacaoTarefa.Designer.cs">
       <DependentUpon>TelaCriacaoTarefa.cs</DependentUpon>
     </Compile>
-    <Compile Include="Views\TelaDev.cs">
+    <Compile Include="Views\TelaTech.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Views\TelaDev.Designer.cs">
-      <DependentUpon>TelaDev.cs</DependentUpon>
+    <Compile Include="Views\TelaTech.Designer.cs">
+      <DependentUpon>TelaTech.cs</DependentUpon>
     </Compile>
     <Compile Include="Views\TelaLogin.cs">
       <SubType>Form</SubType>
@@ -79,11 +79,11 @@
     <Compile Include="Views\TelaLogin.Designer.cs">
       <DependentUpon>TelaLogin.cs</DependentUpon>
     </Compile>
-    <Compile Include="Views\TelaTechLead.cs">
+    <Compile Include="Views\TelaDev.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Views\TelaTechLead.Designer.cs">
-      <DependentUpon>TelaTechLead.cs</DependentUpon>
+    <Compile Include="Views\TelaDev.Designer.cs">
+      <DependentUpon>TelaDev.cs</DependentUpon>
     </Compile>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
@@ -97,14 +97,14 @@
     <EmbeddedResource Include="Views\TelaCriacaoTarefa.resx">
       <DependentUpon>TelaCriacaoTarefa.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Views\TelaDev.resx">
-      <DependentUpon>TelaDev.cs</DependentUpon>
+    <EmbeddedResource Include="Views\TelaTech.resx">
+      <DependentUpon>TelaTech.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Views\TelaLogin.resx">
       <DependentUpon>TelaLogin.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Views\TelaTechLead.resx">
-      <DependentUpon>TelaTechLead.cs</DependentUpon>
+    <EmbeddedResource Include="Views\TelaDev.resx">
+      <DependentUpon>TelaDev.cs</DependentUpon>
     </EmbeddedResource>
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
