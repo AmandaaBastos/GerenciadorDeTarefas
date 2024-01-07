@@ -31,7 +31,7 @@ namespace GerenciadorDeTarefas.Usuarios
             Conexao conexao = new Conexao();
             cmd.Connection = conexao.Conectar();
 
-            using (SqlDataReader reader = cmd.ExecuteReader())
+            using ( reader = cmd.ExecuteReader())
             {
                 if (reader.HasRows)
                 {                    
