@@ -50,7 +50,7 @@ namespace GerenciadorDeTarefas.Views
                 {                    
                     if(controle.techLead)
                     {
-                        TelaTechLead telaTech = new TelaTechLead(TxtUsuario.Text);
+                        TelaTech telaTech = new TelaTech(TxtUsuario.Text);
                         telaTech.Show();               
                         MessageBox.Show("TechLead logado com sucesso", "Entrando", MessageBoxButtons.OK, MessageBoxIcon.Information);
                     }
