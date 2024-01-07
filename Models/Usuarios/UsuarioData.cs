@@ -1,10 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data.SqlClient;
 using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using GerenciadorDeTarefas.Conections;
 using GerenciadorDeTarefas.Models.Busines;
 using GerenciadorDeTarefas.Usuarios.Cargos;
 
@@ -12,33 +14,55 @@ namespace GerenciadorDeTarefas.Usuarios
 {
     internal class UsuarioData
     {
-        private static List<Desenvolvedor> _desenvolvedores;
-        private static List<TechLead> _techLeads;
+        SqlCommand cmd = new SqlCommand();
+        SqlDataReader reader;
+        internal List<Usuario> listaUsuarios;
 
-
-        internal static List<Tarefa> ListarTarefasUsuario(Usuario usuario)
+        internal List<Usuario> ListarUsuarios()
         {
-            List<Tarefa> tarefas = new List<Tarefa>();
-            foreach (Tarefa tarefa in TarefaData.ListarTarefas())
-            {
-                if (tarefa.Responsavel == usuario)
+            listaUsuarios = new List<Usuario>();
+
+            Conexao conexao = new Conexao();
+            cmd.Connection = conexao.Conectar();
+
+            cmd.CommandText = "SELECT * FROM usuarios";
+
+            reader = cmd.ExecuteReader();
+
+            while (reader.Read())
                 {
-                    tarefas.Add(tarefa);
+                    Usuario usuario = new Usuario
+                    {
+                        login = reader["login"].ToString(),
+                        senha = reader["senha"].ToString(),
+                        nomeCompleto = reader["nomeCompleto"].ToString(),
+                        cpf = reader["cpf"].ToString(),
+                        email = reader["email"].ToString(),
+                        cargo = reader["cargo"].ToString()
+                    };
+
+                    listaUsuarios.Add(usuario);
+                }
+            
+            conexao.Desconectar();
+
+            return listaUsuarios;
+        }
+
+
+        internal Usuario SelecionarUsuario(string login)
+        {
+            foreach (Usuario usuario in listaUsuarios)
+            {
+                if (usuario.Login == login)
+                {
+                    return usuario;
                 }
             }
-            return tarefas;
+            return null;
         }
-        internal static Usuario SelecionarUsuario(string login)
-        {
-            Usuario usuario = _techLeads.Where(u => u.Login == login).FirstOrDefault();
-            if (usuario != null) return usuario;
 
-            usuario = _desenvolvedores.Where(u => u.Login == login).FirstOrDefault();
-            if (usuario != null) return usuario;
-
-            throw new InvalidOperationException("Usuário não encontrado.");
-
-        }
+        
 
 
 

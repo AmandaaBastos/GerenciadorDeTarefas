@@ -1,138 +1,107 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data.SqlClient;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using GerenciadorDeTarefas.Conections;
 using GerenciadorDeTarefas.Models.Busines;
 using GerenciadorDeTarefas.Usuarios;
+using static System.Windows.Forms.VisualStyles.VisualStyleElement.ListView;
+using static System.Windows.Forms.VisualStyles.VisualStyleElement.TextBox;
 
 namespace GerenciadorDeTarefas.Models.Busines
 {
     internal class Tarefa
     {
-        public int _idTarefa;
-        private string _titulo, _descricao, _escopo;
-        private DateTime _dataDeCriacao, _dataDeConclusao;
-        private Usuario _responsavel;
-        private StatusTarefa _status;
-        private bool _impedimento;
+        internal int idTarefa;
+        internal string titulo, descricao, escopo, status;
+        internal DateTime dataCriacao, dataConclusao;
+        internal Usuario responsavel;
+        SqlCommand cmd = new SqlCommand();
+        SqlDataReader reader;
 
 
-        internal Tarefa(int idTarefa, string titulo, string descricao, string escopo, Usuario responsavel)
+        internal Tarefa() { }
+
+        internal Tarefa ObterTarefa()
         {
-            this._idTarefa = idTarefa;
-            this._titulo = titulo;
-            this._descricao = descricao;
-            this._escopo = escopo;
-            this._responsavel = responsavel;
-            this._dataDeCriacao = DateTime.Now;
-            this._dataDeConclusao = DataDeConclusao;
-            this._status = StatusTarefa.Aberta;
-            this._impedimento = false;
+            Tarefa tarefa = null;
+
+            cmd.CommandText = "SELECT * FROM tarefas";
+            cmd.Parameters.Clear();
+
+            Conexao conexao = new Conexao();
+            cmd.Connection = conexao.Conectar();
+           
+            UsuarioData usuarioData = new UsuarioData();
+            List<Usuario> listaUsuarios = usuarioData.ListarUsuarios();
+
+            using (reader = cmd.ExecuteReader())
+            {
+                if (reader.HasRows)
+                {
+                    reader.Read();
+                    idTarefa = Convert.ToInt32(reader["idTarefa"]);
+                    titulo = reader["titulo"].ToString();
+                    descricao = reader["descricao"].ToString();
+                    escopo = reader["escopo"].ToString();
+                    dataCriacao = Convert.ToDateTime(reader["dataCriacao"]);
+                    dataConclusao = Convert.ToDateTime(reader["dataConclusao"]);
+                    responsavel = usuarioData.SelecionarUsuario(reader["responsavel"].ToString());
+                    status = reader["status"].ToString();
+
+                    tarefa = this;
+                };
+            }
+            conexao.Desconectar();
+
+            return tarefa;
         }
 
-        internal int IdTarefa { get { return _idTarefa; } }
-        internal string Titulo { get { return _titulo; } }
-        internal string Escopo { get { return _escopo; } }
-        internal string Descricao { get { return _descricao; } }
-        internal DateTime DataDeCriacao { get { return _dataDeCriacao; } }
-        internal DateTime DataDeConclusao
+        internal int IdTarefa { get { return idTarefa; } }
+        internal string Titulo { get { return titulo; } }
+        internal string Escopo { get { return escopo; } }
+        internal string Descricao { get { return descricao; } }
+        internal DateTime DataCriacao { get { return dataCriacao; } }
+        internal DateTime DataConclusao
         {
-            get { return _dataDeConclusao; }
-            set { _dataDeConclusao = value; }
+            get { return dataConclusao; }
+            set { dataConclusao = DateTime.MinValue; }
         }
-        internal Usuario Responsavel { get { return _responsavel; } }
-        internal bool Impedimento { get { return _impedimento; } }
+        internal Usuario Responsavel { get { return responsavel; } }
+        internal string Status { get { return status; } }
+       
 
-        public StatusTarefa Status
-        {
-            get { return _status; }
-            set { _status = value; }
-        }
+        
         internal void ConcluirTarefa()
         {
-            if (this._status == StatusTarefa.EmAndamento)
+            if (this.status == "EmAndamento")
             {
-                this._status = StatusTarefa.Concluida;
-                this._dataDeConclusao = DateTime.Now;
+                this.status = "Concluida";
+                this.dataConclusao = DateTime.Now;
             }
             else
             {
                 Console.WriteLine("Tarefa não pode ser concluída");
             }
         }
-        internal void AtribuirResponsavel(Usuario usuario)
+        internal void GerarId()
         {
-            _responsavel = usuario;
-        }
+            TarefaData tarefaData = new TarefaData();
+            Random random = new Random();
+            int id;
+            do
+            {                
+                id = random.Next(0000000, 9999999);
+            } while (!tarefaData.idExiste);
+            this.idTarefa = id;
+        }      
 
-
-        //internal bool DefinirImpedimento(bool impedimento)
+        //internal void AutoResponsavel(Usuario usuario)
         //{
-        //    this._impedimento = impedimento;
-        //    return true;
-        //}
-        //internal bool AlterarTitulo(string titulo)
-        //{
-        //    if (titulo.Length > 0)
-        //    {
-        //        this._titulo = titulo;
-        //        return true;
-        //    }
-        //    return false;
-        //}
-        //internal bool AlterarEscopo(string escopo)
-        //{
-        //    if (escopo.Length > 0)
-        //    {
-        //        this._escopo = escopo;
-        //        return true;
-        //    }
-        //    return false;
-        //}
-        //internal bool AlterarDescricao(string descricao)
-        //{
-        //    if (descricao.Length > 0)
-        //    {
-        //        this._descricao = descricao;
-        //        return true;
-        //    }
-        //    return false;
-        //}
-        //internal bool AlterarResponsavel(Usuario responsavel)
-        //{
-        //    if (responsavel != null)
-        //    {
-        //        this._responsavel = responsavel;
-        //        return true;
-        //    }
-        //    return false;
-        //}
-        //internal bool AlterarStatus(StatusTarefa status)
-        //{
-        //    this._status = status;
-        //    return true;
-        //}
-        //internal bool AlterarDataDeConclusao(DateTime dataDeConclusao)
-        //{
-        //    if (dataDeConclusao != null)
-        //    {
-        //        this._dataDeConclusao = dataDeConclusao;
-        //        return true;
-        //    }
-        //    return false;
-        //}
-        //internal bool AlterarDataDeCriacao(DateTime dataDeCriacao)
-        //{
-        //    if (dataDeCriacao != null)
-        //    {
-        //        this._dataDeCriacao = dataDeCriacao;
-        //        return true;
-        //    }
-        //    return false;
-        //}
-
-
-
+        //    this._responsavel = usuario;
+        //}       
     }
+   
 }

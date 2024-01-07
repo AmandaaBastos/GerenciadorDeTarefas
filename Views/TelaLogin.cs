@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using GerenciadorDeTarefas.Conections;
 using GerenciadorDeTarefas.Controllers;
 using GerenciadorDeTarefas.Usuarios ;
 
@@ -36,38 +37,26 @@ namespace GerenciadorDeTarefas.Views
         private void TelaLogin_Load(object sender, EventArgs e)
         {
 
-        }
-        private void souTechLead_CheckedChanged(object sender, EventArgs e)
-        {
-            if (cbTechLead.Checked)
-            {
-                Controle controle = new Controle();
-                controle.AcessarCargo(TxtUsuario.Text, "TechLead");
-            }
-            else
-            {
-                Controle controle = new Controle();
-                controle.AcessarCargo(TxtUsuario.Text, "Desenvolvedor");
-            }
-        }
+        }       
 
         private void fazerLogin_Click(object sender, EventArgs e)
         {           
             Controle controle = new Controle();           
             controle.Acessar(TxtUsuario.Text, TxtSenha.Text);
+            controle.VerificarCargo(TxtUsuario.Text, TxtSenha.Text);
             if(controle.mensagem == "" )
             {              
                 if (controle.valido)
                 {                    
-                    if(cbTechLead.Checked)
+                    if(controle.techLead)
                     {
-                        TelaTechLead telaTech = new TelaTechLead(TxtUsuario.Text, TxtSenha.Text);
+                        TelaTechLead telaTech = new TelaTechLead(TxtUsuario.Text);
                         telaTech.Show();               
                         MessageBox.Show("TechLead logado com sucesso", "Entrando", MessageBoxButtons.OK, MessageBoxIcon.Information);
                     }
                     else
                     {
-                        TelaDev telaDesenvolvedor = new TelaDev(TxtUsuario.Text, TxtSenha.Text);
+                        TelaDev telaDesenvolvedor = new TelaDev(TxtUsuario.Text);
                         telaDesenvolvedor.Show();                       
                         MessageBox.Show("Desenvolvedor logado com sucesso", "Entrando", MessageBoxButtons.OK, MessageBoxIcon.Information);
                     }

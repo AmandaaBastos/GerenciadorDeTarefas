@@ -13,26 +13,7 @@ namespace GerenciadorDeTarefas.Usuarios.Cargos
         {          
         }     
 
-        internal bool IniciarTarefa(Tarefa tarefa)
-        {
-            if (tarefa.Status == StatusTarefa.Aberta && tarefa.Responsavel == this)
-            {
-                tarefa.Status = StatusTarefa.EmAndamento;
-                return true;
-            }
-            return false;
-        }
-        internal void ConcluirTarefa(Tarefa tarefa)
-        {
-            if (tarefa.Responsavel == this)
-            {
-                tarefa.ConcluirTarefa();          
-            }
-            else
-            {
-                Console.WriteLine("Você não é o responsável por essa tarefa, portanto não pode conclui-la");
-            }
-        }
+        
         
         
        
