@@ -60,9 +60,9 @@
             this.panel3.BackColor = System.Drawing.SystemColors.ControlLight;
             this.panel3.Controls.Add(this.label1);
             this.panel3.Controls.Add(this.label2);
-            this.panel3.Location = new System.Drawing.Point(1, 0);
+            this.panel3.Location = new System.Drawing.Point(-6, 0);
             this.panel3.Name = "panel3";
-            this.panel3.Size = new System.Drawing.Size(1298, 87);
+            this.panel3.Size = new System.Drawing.Size(1279, 87);
             this.panel3.TabIndex = 1;
             // 
             // label1
@@ -81,8 +81,8 @@
             this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label2.Location = new System.Drawing.Point(29, 33);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(180, 20);
-            this.label2.TabIndex = 2;            
+            this.label2.Size = new System.Drawing.Size(0, 20);
+            this.label2.TabIndex = 2;
             this.label2.Click += new System.EventHandler(this.label2_Click);
             // 
             // tabControl1
